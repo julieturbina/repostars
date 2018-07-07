@@ -1,5 +1,19 @@
-document.addEventListener('DOMContentLoaded', () => {
+$(function() {
+  $('.publish').on('click', function(e) {
+    var repo = {
+      id:    $(this).data('id'),
+      name:  $(this).data('name'),
+      desc:  $(this).data('desc'),
+      url:   $(this).data('url'),
+      stars: $(this).data('stars')
+    };
 
-  console.log('IronGenerator JS imported successfully!');
-
-}, false);
+    $.ajax({
+      url: '/repositories/publish/' + $(this).data('id'),
+      method: 'POST',
+      data: repo
+    }).done(function(response){
+      console.log(response);
+    })
+  })
+});
