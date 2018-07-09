@@ -6,10 +6,20 @@ require("dotenv").config();
 passport.serializeUser(function(user, cb) { cb(null, user); });
 passport.deserializeUser(function(obj, cb) { cb(null, obj);  });
 
+const GITHUB_CLIENT_ID     = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+
+
+
 passport.use(new GitHubStrategy({
     clientID:     process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+
+// passport.use(new GitHubStrategy({
+//     clientID:     process.env.GITHUB_CLIENT_ID,
+//     clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
   },
   (accessToken, refreshToken, profile, done) => {
     // const {
